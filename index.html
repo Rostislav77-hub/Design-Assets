@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Card Carousel</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e9eef5;
+  font-family: Arial, sans-serif;
+}
+
+.deck {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  perspective: 1000px;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #0b0f19;
+  color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all 0.5s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Position styles */
+.c1 { transform: translateX(-120px) rotate(-15deg) scale(0.8); opacity: 0.6; }
+.c2 { transform: translateX(-60px) rotate(-8deg) scale(0.9); opacity: 0.8; }
+.c3 { transform: translateX(0) rotate(0deg) scale(1); z-index: 5; }
+.c4 { transform: translateX(60px) rotate(8deg) scale(0.9); opacity: 0.8; }
+.c5 { transform: translateX(120px) rotate(15deg) scale(0.8); opacity: 0.6; }
+
+</style>
+</head>
+
+<body>
+
+<div class="deck">
+  <div class="card c1">Project A</div>
+  <div class="card c2">Project B</div>
+  <div class="card c3">Project C</div>
+  <div class="card c4">Project D</div>
+  <div class="card c5">Project E</div>
+</div>
+
+<script>
+const cards = document.querySelectorAll('.card');
+let classes = ['c1','c2','c3','c4','c5'];
+
+cards.forEach((card, index) => {
+  card.addEventListener('click', () => {
+    rotateCards();
+  });
+});
+
+function rotateCards() {
+  classes.unshift(classes.pop()); // rotate array
+
+  cards.forEach((card, i) => {
+    card.className = 'card ' + classes[i];
+  });
+}
+</script>
+
+</body>
+</html>
