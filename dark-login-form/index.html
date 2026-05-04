@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- Подключение иконок FontAwesome -->
     <script src="https://kit.fontawesome.com/72de7666a8.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
@@ -14,9 +13,19 @@
         <div class="nav-like">
           <div class="title"><h4>Sign in</h4></div>
           <div class="logo">
-            <img class="main-logo" src="./images/my_logo_white.png" alt="" />
+            <img
+              class="main-logo"
+              src="./images/my_logo_white.png"
+              alt="P3"
+              onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block'"
+            />
+            <span
+              id="logo-fallback"
+              style="display:none; color:white; font-weight:900; font-size:20px; letter-spacing:1px;"
+            >P3</span>
           </div>
         </div>
+
         <div class="parent">
           <div class="form-login">
             <div class="sub-title"><h5>P3 Graphics Login</h5></div>
@@ -25,18 +34,21 @@
                 <i class="fas fa-user"></i>
                 <input type="text" placeholder="Username" />
               </div>
+
               <div class="input-group password-group">
                 <i class="fas fa-lock"></i>
-                <input type="password" placeholder="Password" />
-                <div class="show-password">
-                  <i class="fas fa-eye"></i>
-                </div>
+                <input id="password-input" type="password" placeholder="Password" />
+                <button class="show-password" id="toggle-password" type="button">
+                  <i id="eye-icon" class="fas fa-eye"></i>
+                </button>
               </div>
+
               <div class="keep">
                 <input class="checkbox" type="checkbox" id="keep-me-signed-in" />
                 <label for="keep-me-signed-in">Keep me signed in</label>
               </div>
-              <button>Sign in</button>
+
+              <button type="button">Sign in</button>
 
               <div class="forget">
                 <a href="">Forget Username?</a>
@@ -45,9 +57,10 @@
               </div>
             </div>
           </div>
+
           <div>
             <div class="socials">
-              <div class="social-icons">
+              <div class="social-icons" style="display:flex; gap:16px; align-items:center;">
                 <i class="fab fa-google"></i>
                 <i class="fab fa-facebook-f"></i>
                 <i class="fab fa-github"></i>
@@ -65,5 +78,18 @@
         </div>
       </div>
     </div>
+
+    <script>
+      const toggleBtn = document.getElementById('toggle-password');
+      const passwordInput = document.getElementById('password-input');
+      const eyeIcon = document.getElementById('eye-icon');
+
+      toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        eyeIcon.classList.toggle('fa-eye', !isPassword);
+        eyeIcon.classList.toggle('fa-eye-slash', isPassword);
+      });
+    </script>
   </body>
 </html>
